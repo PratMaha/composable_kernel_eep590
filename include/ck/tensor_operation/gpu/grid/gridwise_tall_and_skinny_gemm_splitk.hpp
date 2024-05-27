@@ -48,8 +48,8 @@ template <index_t BlockSize,
           typename BLayout,
           typename CLayout,
           tensor_operation::device::GemmSpecialization GemmSpec,
-          index_t MPerBlock,
-          index_t NPerBlock,
+          index_t MPerBlock, // 16
+          index_t NPerBlock, // 128
           index_t K0PerBlock,
           index_t K1Value,
           index_t MPerThread,
@@ -437,10 +437,13 @@ struct GridwiseTsmmDl_km_kn_mn
     {
         constexpr index_t shared_block_size =
             GridwiseTsmm::GetSharedMemoryNumberOfByte() / sizeof(FloatAB);
+        // constexpr index_t tile_size_m = MPerBlock;
+        // constexpr index_t tile_size_n = NPerBlock;
 
         __shared__ FloatAB p_shared_block[shared_block_size];
 
-        const Block2CTileMap& block_2_ctile_map = Block2CTileMap{};
+        // const Block2CTileMap& block_2_ctile_map = Block2CTileMap{};
+        const BlockToCTileMap_3DGrid_KSplit<MPerBlock, NPerBlock> block_2_ctile_map = BlockToCTileMap_3DGrid_KSplit<MPerBlock, NPerBlock>{};
 
         const auto MPadded = CalculateMPadded(karg.M);
         const auto NPadded = CalculateNPadded(karg.N);
@@ -471,7 +474,7 @@ struct GridwiseTsmmDl_km_kn_mn
             p_c_grid, c_grid_desc_m0_m10_m11_n0_n10_n11.GetElementSpaceSize());
 
         const auto c_m0_n0_block_cluster_idx = block_2_ctile_map.convert_1D_block_idx_to_3D_tuple(
-            get_block_1d_id(), karg.N, karg.k_batch);
+            get_block_1d_id(), karg.N, karg.M, karg.k_batch);
 
         // HACK: this force index data into SGPR
         const index_t im0       = __builtin_amdgcn_readfirstlane(c_m0_n0_block_cluster_idx[I0]);
@@ -576,6 +579,8 @@ struct GridwiseTsmmDl_km_kn_mn
 
         constexpr auto c_thread_desc_m10_m11_n10_n11 = make_naive_tensor_descriptor_packed(
             sequence_to_tuple_of_number(c_m10_m11_n10_n11_thread_tensor_lengths));
+        
+        // asm volatile("s_endpgm"); // Execution time before LDS allocation: 0.002048ms --> 0.002544ms (larger block size)
 
         // LDS allocation for A and B: be careful of alignment
         constexpr auto a_block_aligned_space_size = math::integer_least_multiple(
@@ -595,6 +600,7 @@ struct GridwiseTsmmDl_km_kn_mn
 
         // Initialize C
         c_thread_buf.Clear();
+        // Execution time before shared memory: 0.002032ms
 
         constexpr auto a_block_slice_copy_step  = make_multi_index(0, K0PerBlock, 0, 0, 0);
         constexpr auto b_thread_slice_copy_step = make_multi_index(0, K0PerBlock, 0, 0, 0);
@@ -605,6 +611,8 @@ struct GridwiseTsmmDl_km_kn_mn
         auto a_block_odd_buf = make_dynamic_buffer<AddressSpaceEnum::Lds>(
             p_a_block_double + a_block_aligned_space_size,
             a_block_desc_copy_kbatch_k0_m0_m1_k1.GetElementSpaceSize());
+        
+        // asm volatile("s_endpgm"); // Execution time before double buffer: 0.002016ms --> 0.0025758ms (larger block size)
 
         // LDS double buffer: preload data into LDS
         {
@@ -618,10 +626,13 @@ struct GridwiseTsmmDl_km_kn_mn
                                   b_thread_desc_copy_k0_n0_n1_k1,
                                   make_tuple(I0, I0, I0, I0, I0),
                                   b_thread_even_buf);
+            
+            // asm volatile("s_endpgm"); // Execution time after preload data into LDS: 0.003136ms --> 0.003584ms (larger block size)
         }
 
         if constexpr(HasMainKBlockLoop)
         {
+            // asm volatile("s_endpgm"); // The program would not be affected by this if function
             const auto K0 = a_grid_desc_kbatch_k0_m0_m1_k1.GetLength(I1);
 
             index_t k_block_data_begin = 0;
@@ -719,6 +730,7 @@ struct GridwiseTsmmDl_km_kn_mn
 
             // LDS double buffer: GEMM on last data
             blockwise_tsmm.Run(a_block_even_buf, b_thread_even_buf, c_thread_buf);
+            // asm volatile("s_endpgm"); // After double buffering: 0.004638ms --> 0.0064478ms (larger block size)
         }
 
         // output: register to global memory
@@ -767,6 +779,6 @@ struct GridwiseTsmmDl_km_kn_mn
                      c_grid_desc_m0_m10_m11_n0_n10_n11,
                      c_grid_buf);
         }
-    }
+    } // Full program execution time: 0.0067198ms --> 0.007748ms (larger block size)
 };
 } // namespace ck
