@@ -19,10 +19,10 @@ using CElementOp = PassThrough;
 
 static constexpr auto GemmMNPadding = ck::tensor_operation::device::GemmSpecialization::MNPadding;
 
-#define K1 2
-#define K0 4
+#define K1 2 // For higher accuracy: 4
+#define K0 4 // For higher accuracy: 8
 #define N1 2
-#define B 64 // block-size:64
+#define B 256 // block-size:64 --> 256
 #define M1 16
 
 // clang-format off
