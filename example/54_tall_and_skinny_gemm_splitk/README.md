@@ -92,3 +92,13 @@ __host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
                       block_1d_id % k_batch); // returns 3D tuple as (Mid,Nid,Kid)
 }
 ```
+## 3. Block and Grid Configuration
+
+The configuration of blocks and grids written in 'tall_and_skinny_gemm_splitk_fp16.cpp' plays a crucial role in optimizing the execution of GPU kernels for performance and accuracy. Below are the macro definitions used to set up the kernel's block and grid dimensions:
+
+```cpp
+#define K1 2   // Default setting for kernel dimension. For higher accuracy, set to 4.
+#define K0 4   // Default setting for kernel dimension. For higher accuracy, set to 8.
+#define N1 2   // Sets the dimension for kernel execution.
+#define B 256   // Block size setting: default is 64. Can be increased to 256 for different performance characteristics.
+#define M1 16  // Sets another dimension for the kernel execution.
