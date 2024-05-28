@@ -8,12 +8,12 @@ MY_PROJECT_SOURCE=$1
 if [ $# -ge 2 ] ; then
     GPU_TARGETS=$2
 else
-    GPU_TARGETS="gfx908;gfx90a;gfx940"
+    GPU_TARGETS="gfx908"
 fi
 
 cmake                                                                                             \
 -D CMAKE_PREFIX_PATH=/opt/rocm                                                                    \
--D CMAKE_CXX_COMPILER=/opt/rocm/bin/hipcc                                                         \
+-D CMAKE_CXX_COMPILER=/opt/rocm-5.7.1/bin/hipcc                                                         \
 -D CMAKE_CXX_FLAGS="-Xclang -mllvm -Xclang -enable-post-misched=0 -std=c++17 -O3 -ftemplate-backtrace-limit=0  -fPIE  -Wno-gnu-line-marker"     \
 -D CMAKE_BUILD_TYPE=Release                                                                       \
 -D BUILD_DEV=ON                                                                                   \
