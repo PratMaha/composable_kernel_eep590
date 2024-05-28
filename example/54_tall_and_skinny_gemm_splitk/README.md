@@ -39,6 +39,26 @@ $ sbatch ./submit_jobs.sh
 ```
 The submit_jobs.sh file used to send the request to the server to run the profiler and generate a analysis.txt file that is user-friendly to analyze the performance.
 
+## Analysis.txt file example (First Part)
+```bash
+--------
+Analyze
+--------
+
+
+--------------------------------------------------------------------------------
+0. Top Stat
+╒════╤══════════════════════════════════════════╤═════════╤═══════════╤════════════╤══════════════╤═══════╕
+│    │ KernelName                               │   Count │   Sum(ns) │   Mean(ns) │   Median(ns) │   Pct │
+╞════╪══════════════════════════════════════════╪═════════╪═══════════╪════════════╪══════════════╪═══════╡
+│  0 │ void kernel_tsmm_dl_v1r3<GridwiseTsmmDl_ │   12.00 │ 101440.00 │    8453.33 │      6720.00 │ 82.23 │
+│    │ km_kn_mn, _Float16, _Float16, (InMemoryD │         │           │            │              │       │
+│    │ ataOperationEnum)1, false, false, Blo... │         │           │            │              │       │
+├────┼──────────────────────────────────────────┼─────────┼───────────┼────────────┼──────────────┼───────┤
+│  1 │ __amd_rocclr_fillBufferAligned.kd        │    3.00 │  21920.00 │    7306.67 │      7200.00 │ 17.77 │
+╘════╧══════════════════════════════════════════╧═════════╧═══════════╧════════════╧══════════════╧═══════╛
+```
+
 ## Run ```example_tall_and_skinny_gemm_splitk_fp16```
 ```bash
 #arg1: verification (0=no, 1=yes)
