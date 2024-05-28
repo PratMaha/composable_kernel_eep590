@@ -1,6 +1,7 @@
 # Perf counters groups
-pmc: Wavefronts GPUBusy FetchSize WriteSize TCC_HIT_sum TCC_MISS_sum
-pmc: VALUUtilization VALUBusy SALUBusy L2CacheHit MemUnitStalled WriteUnitStalled LDSBankConflict
+pmc :  FetchSize WriteSize GPUBusy Wavefronts
+pmc :  TCC_HIT_sum TCC_MISS_sum
+pmc : VALUUtilization VALUBusy SALUBusy L2CacheHit MemUnitStalled WriteUnitStalled LDSBankConflict
 # top5 runs were warm up, so we only track from 5th to the end
 range: 5:
 # We have 4 gpu units whose index is from 0 to 3

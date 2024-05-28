@@ -202,6 +202,7 @@ This fork introduces a user-defined parameter to specify the maximum number of t
 ```bash
 mkdir build
 cd build
+chmod 777 ../script/cmake-ck-dev.sh
 ../script/cmake-ck-dev.sh ..
 make example_gemm_xdl_streamk
 ```
@@ -213,7 +214,7 @@ bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 <total_CUs_in_G
 ```
 For DP GEMM, use `total_CUs_in_GPU = 0`.
 
-For streamk GEMM, use `total_CUs_in_GPU = 360` to maximize the number of streamk blocks.
+For streamk GEMM, according to current parameters, use `total_CUs_in_GPU = 360` to maximize the number of streamk blocks.
 
 ### Profile
 
