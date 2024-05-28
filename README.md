@@ -247,4 +247,15 @@ This modification allows setting the maximum number of tiles per stream-k block 
 bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 <total_CUs_in_GPU> <max_tile_per_block>
 ```
 
-This approach ensures that the stream-k computation can achieve optimal performance by reaching the inflection point where the acceleration benefit outweighs the overhead.
+This approach ensures that the stream-k computation can achieve optimal performance by reaching the inflection point where the acceleration benefit outweighs the overhead. Here is an example
+
+```bash
+bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 0
+# Perf: 1.43972 ms, 89.4959 TFlops, 67.0054 GB/s
+
+bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 360
+# Perf: 1.50914 ms, 85.3791 TFlops, 63.9232 GB/s
+
+bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 360 3
+# Perf: 1.29734 ms, 99.3182 TFlops, 74.3593 GB/s
+```
