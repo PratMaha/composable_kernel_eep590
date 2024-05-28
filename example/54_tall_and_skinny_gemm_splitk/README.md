@@ -71,10 +71,9 @@ __device__ static void Run(const Argument& karg) {
 }
 ```
 ## 2. Block to CTile Map Code Modification
-## Block to CTile Map Code Modification
 
 The function `convert_1D_block_idx_to_3D_tuple` written in 'block_to_ctile_map.hpp' efficiently maps a 1D block index to a 3D tuple representing different dimensions (M, N, K) of the problem space. This helps in mapping the computational tasks onto the hardware more efficiently and optimally utilizing the Compute Units (CUs). Here's a brief on how the function works:
-'
+
 ```bash
 __host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
     const index_t& block_1d_id, const index_t& N, const index_t& k_batch) const
