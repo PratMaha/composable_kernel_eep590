@@ -3,9 +3,12 @@
 ## Create directory
 ```bash
 mkdir build
+```
+```bash
 cd build
 ../script/cmake-ck-dev.sh ..
 ```
+After these steps, there would have abundant files generated for execution assistance.
 
 
 
