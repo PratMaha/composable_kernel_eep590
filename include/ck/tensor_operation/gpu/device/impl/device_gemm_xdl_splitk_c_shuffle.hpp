@@ -58,11 +58,12 @@ template <typename ADataType,
           index_t CShuffleNRepeatPerShuffle,
           typename CBlockTransferClusterLengths_MBlock_MPerBlock_NBlock_NPerBlock,
           index_t CBlockTransferScalarPerVector_NWaveNPerXDL,
-          typename ComputeType        = CDataType,
-          PipelineVersion PipelineVer = PipelineVersion::v1,
-          LoopScheduler LoopSched     = make_default_loop_scheduler(),
-          typename LDSTypeA           = ComputeType,
-          typename LDSTypeB           = ComputeType>
+          typename ComputeType          = CDataType,
+          PipelineVersion PipelineVer   = PipelineVersion::v1,
+          index_t NumGemmKPrefetchStage = 1,
+          LoopScheduler LoopSched       = make_default_loop_scheduler(),
+          typename LDSTypeA             = ComputeType,
+          typename LDSTypeB             = ComputeType>
 
 struct DeviceGemmXdlSplitKCShuffle : public DeviceGemmSplitK<ALayout,
                                                              BLayout,
@@ -79,9 +80,6 @@ struct DeviceGemmXdlSplitKCShuffle : public DeviceGemmSplitK<ALayout,
     static constexpr auto I1 = Number<1>{};
     static constexpr auto I2 = Number<2>{};
     static constexpr auto I3 = Number<3>{};
-
-    // TODO: should be exposed as Tparams.
-    static constexpr index_t NumGemmKPrefetchStage = 1;
 
     using ComputeTypeA = ComputeType;
     using ComputeTypeB = ComputeType;
