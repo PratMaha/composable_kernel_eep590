@@ -1,4 +1,5 @@
 # Instructions for ```example_tall_and_skinny_gemm_splitk_fp16```
+### The README provides comprehensive instructions and detailed code modifications for setting up, executing, and optimizing the example_tall_and_skinny_gemm_splitk_fp16 program, including guidance on directory setup, profiling with OmniPerf, job submission, and configuring kernel parameters for improved GPU performance.
 
 ## Create directory
 ```bash
