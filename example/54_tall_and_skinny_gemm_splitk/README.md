@@ -2,16 +2,20 @@
 
 ## Create directory
 ```bash
-mkdir build
+$ mkdir build
 ```
 ```bash
-cd build
-../script/cmake-ck-dev.sh ..
+$ cd build
+$ ../script/cmake-ck-dev.sh ..
 ```
 After these steps, there would have abundant files generated for execution assistance.
 
-
-
+## Load Profiler
+```bash
+$ module load rocm/5.7.1
+$ module load omniperf
+```
+These steps used for load the omniperf profiler for user to analyze the performance of the GPUs for efficiently.
 
 ## Run ```example_gemv_splitk```
 ```bash
