@@ -56,8 +56,9 @@ c_m_n: dim 2, lengths {16, 16}, strides {16, 1}
 Perf: 0.0065438 ms, 0.0801198 TFlops, 10.0932 GB/s, deviceTsmmDl<64, 16, 128, 4, 2, 16, 2, 1>
 ```
 ## Code Modification
-## 2D Array Handling in the Kernel
-Include the 2D array handling within the Run function of the device:
+## 1. 2D Array Handling in the Kernel
+Include the 2D array handling within the Run function of the device written in 'gridwise_tall_and_skinny_gemm_splitk.hpp', 
+and further explanation is provided in the report: 
 ```bash
 __device__ static void Run(const Argument& karg) {
     // constexpr index_t shared_block_size =
@@ -67,5 +68,28 @@ __device__ static void Run(const Argument& karg) {
 
     __shared__ FloatAB p_shared_block[tile_size_m][tile_size_n];
    // following code ...
+}
+```
+## 2. Block to CTile Map Code Modification
+## Block to CTile Map Code Modification
+
+The function `convert_1D_block_idx_to_3D_tuple` written in 'block_to_ctile_map.hpp' efficiently maps a 1D block index to a 3D tuple representing different dimensions (M, N, K) of the problem space. This helps in mapping the computational tasks onto the hardware more efficiently and optimally utilizing the Compute Units (CUs). Here's a brief on how the function works:
+'
+```bash
+__host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
+    const index_t& block_1d_id, const index_t& N, const index_t& k_batch) const
+{
+    // Calculate the number of blocks per N dimension
+    const auto Ndim = math::integer_divide_ceil(N, NPerBlock);
+
+    // Divide the 1D block index by the number of k_batch to find the overall batch position
+    const auto div_k_batch = block_1d_id / k_batch;
+
+    // Calculate the M index (Mid) by dividing the overall batch position by Ndim
+    // Calculate the N index (Nid) by taking the remainder of the division of the batch position by Ndim
+    // Calculate the K index (Kid) by taking the remainder of the 1D block index with k_batch
+    return make_tuple(div_k_batch / Ndim,
+                      div_k_batch % Ndim,
+                      block_1d_id % k_batch); // returns 3D tuple as (Mid,Nid,Kid)
 }
 ```
