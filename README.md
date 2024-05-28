@@ -192,3 +192,58 @@ script/uninstall_precommit.sh
 
 If you need to temporarily disable pre-commit hooks, you can add the `--no-verify` option to the
 `git commit` command.
+
+## Modification of this fork
+
+This fork introduces a user-defined parameter to specify the maximum number of tiles for each stream-k block, enhancing flexibility and adaptability to various matrix sizes and other corresponding parameters. This improvement contrasts with the original default setting of 2-tiles, offering more tailored performance optimization.
+
+### How to build 
+
+```bash
+mkdir build
+cd build
+../script/cmake-ck-dev.sh ..
+make example_gemm_xdl_streamk
+```
+
+### Baseline
+
+```bash
+bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 <total_CUs_in_GPU>
+```
+For DP GEMM, use `total_CUs_in_GPU = 0`.
+
+For streamk GEMM, use `total_CUs_in_GPU = 360` to maximize the number of streamk blocks.
+
+### Profile
+
+1. Execution metrics tracking via rocprof --hip-trace
+
+```bash
+rocprof --hip-trace bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 <total_CUs_in_GPU>
+```
+
+Then we would get six files started by "results", containing execution time distribution of all HIP calls. Use Perfetto to visualize the process with the "results.json" file.
+
+2. Hardware metrics tracking via rocprof input file
+
+Configure desired metrics in "input.txt" and use the following command:
+
+```bash
+mv ../input.txt .
+rocprof -i input.txt bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 <total_CUs_in_GPU>
+```
+
+The resulting "input.csv" file will be created. 
+
+Refer to "<rocm path>/lib/rocprofiler/metrics.xml" for additional metrics. 
+
+### Optimize
+
+This modification allows setting the maximum number of tiles per stream-k block via an eleventh user-input parameter. This enables users to adjust the tile count to better suit the matrix dimensions, total_CUs_in_GPU, and other parameters such as MPerBlock and NPerBlock defined in the "gemm_xdl_streamk.cpp" file.
+
+```bash
+bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 <total_CUs_in_GPU> <max_tile_per_block>
+```
+
+This approach ensures that the stream-k computation can achieve optimal performance by reaching the inflection point where the acceleration benefit outweighs the overhead.
