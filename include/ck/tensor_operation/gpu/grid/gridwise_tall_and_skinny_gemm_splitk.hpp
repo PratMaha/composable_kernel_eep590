@@ -435,12 +435,12 @@ struct GridwiseTsmmDl_km_kn_mn
               InMemoryDataOperationEnum CGlobalMemoryDataOperation>
     __device__ static void Run(const Argument& karg)
     {
-        constexpr index_t shared_block_size =
-            GridwiseTsmm::GetSharedMemoryNumberOfByte() / sizeof(FloatAB);
-        // constexpr index_t tile_size_m = MPerBlock;
-        // constexpr index_t tile_size_n = NPerBlock;
+        // constexpr index_t shared_block_size =
+        //    GridwiseTsmm::GetSharedMemoryNumberOfByte() / sizeof(FloatAB);
+        constexpr index_t tile_size_m = MPerBlock;
+        constexpr index_t tile_size_n = NPerBlock;
 
-        __shared__ FloatAB p_shared_block[shared_block_size];
+        __shared__ FloatAB p_shared_block[tile_size_m][tile_size_n];
 
         // const Block2CTileMap& block_2_ctile_map = Block2CTileMap{};
         const BlockToCTileMap_3DGrid_KSplit<MPerBlock, NPerBlock> block_2_ctile_map = BlockToCTileMap_3DGrid_KSplit<MPerBlock, NPerBlock>{};
@@ -586,7 +586,7 @@ struct GridwiseTsmmDl_km_kn_mn
         constexpr auto a_block_aligned_space_size = math::integer_least_multiple(
             a_block_desc_k0_m0_m1_k1.GetElementSpaceSize(), max_lds_align);
 
-        FloatAB* p_a_block_double = p_shared_block;
+        FloatAB* p_a_block_double = &p_shared_block[0][0];
 
         auto b_thread_odd_buf = make_static_buffer<AddressSpaceEnum::Vgpr, FloatAB>(
             b_k0_n_k1_thread_desc.GetElementSpaceSize());
