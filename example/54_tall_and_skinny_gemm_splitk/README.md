@@ -15,7 +15,28 @@ After these steps, there would have abundant files generated for execution assis
 $ module load rocm/5.7.1
 $ module load omniperf
 ```
-These steps used for load the omniperf profiler for user to analyze the performance of the GPUs for efficiently.
+These steps used for load the omniperf profiler that help user to analyze the performance of the GPUs more efficiently.
+
+## submit_jobs.sh
+```bash
+#!/bin/bash
+#SBATCH --job-name=example_job
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=00:03:00
+#SBATCH --account=sadasivan
+#SBATCH --partition=devel
+# or use --partition=mi1004x if required
+
+ # Run your code. Example given below.
+omniperf profile -n result/ -- bin/example_tall_and_skinny_gemm_splitk_fp16 1 2 1 231
+omniperf analyze -p /work1/sadasivan/student30/composable_kernel/build_new/workloads/result/mi100 &>analysis.txt
+```
+```bash
+$ sbatch ./submit_jobs.sh
+```
+The submit_jobs.sh file used to send the request to the server to run the profiler and generate a analysis.txt file that is user-friendly to analyze the performance.
 
 ## Run ```example_gemv_splitk```
 ```bash
