@@ -1,4 +1,4 @@
-# Instructions for ```example_gemv_splitk```
+# Instructions for ```example_tall_and_skinny_gemm_splitk_fp16```
 
 ## Create directory
 ```bash
@@ -38,7 +38,7 @@ $ sbatch ./submit_jobs.sh
 ```
 The submit_jobs.sh file used to send the request to the server to run the profiler and generate a analysis.txt file that is user-friendly to analyze the performance.
 
-## Run ```example_gemv_splitk```
+## Run ```example_tall_and_skinny_gemm_splitk_fp16```
 ```bash
 #arg1: verification (0=no, 1=yes)
 #arg2: initialization (0=no init, 1=integer value, 2=decimal value)
