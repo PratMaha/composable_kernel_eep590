@@ -667,7 +667,7 @@ struct BlockToCTileMap_3DGrid_KSplit
         const auto total_blocks_per_batch = Ndim * Mdim;
 
         const index_t Kid = (block_1d_id / total_blocks_per_batch) % k_batch;
-        const index_t remaining_blocks = block_1d_id % total_blocks_per_batch;
+        const index_t remaining_blocks = block_1d_id % total_blocks_per_batch; //using the remaining blocks to even the utilization of CUs
         const index_t Mid = remaining_blocks / Ndim;
         const index_t Nid = remaining_blocks % Ndim;
 
