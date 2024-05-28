@@ -272,7 +272,8 @@ bool run_gemm(const ProblemType& problem_size, const ExecutionConfig& config)
             a_element_op,
             b_element_op,
             c_element_op,
-            problem_size.NumSKBlocks);
+            problem_size.NumSKBlocks,
+            problem_size.MaxTilePerBlock);
 
         if(!gemm.IsSupportedArgument(argument))
         {
@@ -280,7 +281,7 @@ bool run_gemm(const ProblemType& problem_size, const ExecutionConfig& config)
 
             return true;
         }
-
+        
         std::size_t workspace_size = gemm.GetWorkSpaceSize(&argument);
         if(workspace_size != 0)
         {

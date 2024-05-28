@@ -277,7 +277,8 @@ struct DeviceGemmXdlStreamK : public DeviceGemmStreamK<ALayout,
                              AElementwiseOperation,
                              BElementwiseOperation,
                              CElementwiseOperation,
-                             uint32_t NumSKBlocks = 0)
+                             uint32_t NumSKBlocks = 0,
+                             uint32_t MaxTilePerBlock = 2)
     {
         const auto kernel = kernel_gemm_xdlops_streamk<GridwiseGemm>;
         int occupancy, num_cu;
@@ -299,7 +300,8 @@ struct DeviceGemmXdlStreamK : public DeviceGemmStreamK<ALayout,
                         StrideC,
                         static_cast<uint32_t>(num_cu),
                         static_cast<uint32_t>(occupancy),
-                        NumSKBlocks};
+                        NumSKBlocks,
+                        MaxTilePerBlock};
     }
 
     static auto MakeInvoker() { return Invoker{}; }
@@ -317,7 +319,8 @@ struct DeviceGemmXdlStreamK : public DeviceGemmStreamK<ALayout,
                                                       AElementwiseOperation,
                                                       BElementwiseOperation,
                                                       CElementwiseOperation,
-                                                      index_t NumSKBlocks = 0) override
+                                                      index_t NumSKBlocks = 0,
+                                                      index_t MaxTilePerBlock = 2) override
     {
         const auto kernel = kernel_gemm_xdlops_streamk<GridwiseGemm>;
         int occupancy, num_cu;
@@ -339,7 +342,8 @@ struct DeviceGemmXdlStreamK : public DeviceGemmStreamK<ALayout,
                                           StrideC,
                                           static_cast<uint32_t>(num_cu),
                                           static_cast<uint32_t>(occupancy),
-                                          static_cast<uint32_t>(NumSKBlocks));
+                                          static_cast<uint32_t>(NumSKBlocks),
+                                          static_cast<uint32_t>(MaxTilePerBlock));
     }
 
     // polymorphic

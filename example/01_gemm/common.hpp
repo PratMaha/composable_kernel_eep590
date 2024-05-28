@@ -44,6 +44,7 @@ struct ProblemSizeStreamK final
     ck::index_t StrideC = 4096;
 
     ck::index_t NumSKBlocks = -1;
+    ck::index_t MaxTilePerBlock = 2;
 };
 
 struct ExecutionConfig final
@@ -143,6 +144,10 @@ bool parse_cmd_args<ProblemSizeStreamK>(int argc,
         if(argc >= 11)
         {
             problem_size.NumSKBlocks = std::stoi(argv[10]);
+            if(argc >= 12)
+            {
+                problem_size.MaxTilePerBlock = std::stoi(argv[11]);
+            }
         }
     }
     else
@@ -152,7 +157,8 @@ bool parse_cmd_args<ProblemSizeStreamK>(int argc,
                   << std::endl
                   << "arg3: time kernel (0=no, 1=yes)" << std::endl
                   << "arg4 to 9: M (256x), N(128x), K(32x), StrideA, StrideB, StrideC" << std::endl
-                  << "arg10: NumSKBlocks(optional)" << std::endl;
+                  << "arg10: NumSKBlocks(optional)" << std::endl
+                  << "arg11: MaxTilePerBlock(optional)" << std::endl;
         return false;
     }
 

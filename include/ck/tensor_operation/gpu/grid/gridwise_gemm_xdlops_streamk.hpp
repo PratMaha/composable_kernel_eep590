@@ -159,7 +159,8 @@ struct GridwiseGemm_bk0mk1_bk0nk1_mn_xdlops_streamk
                  index_t StrideC_,
                  uint32_t num_cu_,
                  uint32_t occupancy_,
-                 uint32_t num_sk_blocks_)
+                 uint32_t num_sk_blocks_,
+                 uint32_t max_tile_per_block_)
             : p_a_grid(p_a_grid_),
               p_b_grid(p_b_grid_),
               p_c_grid(p_c_grid_),
@@ -171,7 +172,7 @@ struct GridwiseGemm_bk0mk1_bk0nk1_mn_xdlops_streamk
               StrideC(StrideC_),
               num_cu(num_cu_),
               occupancy(occupancy_),
-              block_mapping(M, N, K, num_cu_, occupancy_, num_sk_blocks_)
+              block_mapping(M, N, K, num_cu_, occupancy_, num_sk_blocks_, max_tile_per_block_)
         {
         }
 
