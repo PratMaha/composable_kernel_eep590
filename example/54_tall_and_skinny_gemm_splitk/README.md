@@ -1,5 +1,15 @@
 # Instructions for ```example_gemv_splitk```
 
+## Create directory
+```bash
+mkdir build
+cd build
+../script/cmake-ck-dev.sh ..
+```
+
+
+
+
 ## Run ```example_gemv_splitk```
 ```bash
 #arg1: verification (0=no, 1=yes)
