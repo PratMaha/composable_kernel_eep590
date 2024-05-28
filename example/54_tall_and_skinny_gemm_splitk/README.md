@@ -57,7 +57,7 @@ Perf: 0.0065438 ms, 0.0801198 TFlops, 10.0932 GB/s, deviceTsmmDl<64, 16, 128, 4,
 ```
 ## Code Modification
 ## 1. 2D Array Handling in the Kernel
-Include the 2D array handling within the Run function of the device written in 'gridwise_tall_and_skinny_gemm_splitk.hpp', 
+Include the 2D array handling within the `Run` function of the device written in `gridwise_tall_and_skinny_gemm_splitk.hpp`, 
 and further explanation is provided in the report: 
 ```bash
 __device__ static void Run(const Argument& karg) {
@@ -72,7 +72,7 @@ __device__ static void Run(const Argument& karg) {
 ```
 ## 2. Block to CTile Map Code Modification
 
-The function `convert_1D_block_idx_to_3D_tuple` written in 'block_to_ctile_map.hpp' efficiently maps a 1D block index to a 3D tuple representing different dimensions (M, N, K) of the problem space. This helps in mapping the computational tasks onto the hardware more efficiently and optimally utilizing the Compute Units (CUs). Here's a brief on how the function works:
+The function `convert_1D_block_idx_to_3D_tuple` written in `block_to_ctile_map.hpp` efficiently maps a 1D block index to a 3D tuple representing different dimensions (M, N, K) of the problem space. This helps in mapping the computational tasks onto the hardware more efficiently and optimally utilizing the Compute Units (CUs). Here's a brief on how the function works:
 
 ```bash
 __host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
@@ -94,7 +94,7 @@ __host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
 ```
 ## 3. Block and Grid Configuration
 
-The configuration of blocks and grids written in 'tall_and_skinny_gemm_splitk_fp16.cpp' plays a crucial role in optimizing the execution of GPU kernels for performance and accuracy. Below are the macro definitions used to set up the kernel's block and grid dimensions:
+The `configuration of blocks and grids` written in `tall_and_skinny_gemm_splitk_fp16.cpp` plays a crucial role in optimizing the execution of GPU kernels for performance and accuracy. Below are the macro definitions used to set up the kernel's block and grid dimensions:
 
 ```cpp
 #define K1 2   // Default setting for kernel dimension. For higher accuracy, set to 4.
