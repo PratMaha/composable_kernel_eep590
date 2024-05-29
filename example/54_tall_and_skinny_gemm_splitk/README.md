@@ -92,26 +92,37 @@ __device__ static void Run(const Argument& karg) {
 }
 ```
 ## 2. Block to CTile Map Code Modification
-
-The function `convert_1D_block_idx_to_3D_tuple` written in `block_to_ctile_map.hpp` efficiently maps a 1D block index to a 3D tuple representing different dimensions (M, N, K) of the problem space. This helps in mapping the computational tasks onto the hardware more efficiently and optimally utilizing the Compute Units (CUs). Here's a brief on how the function works:
+The function `convert_1D_block_idx_to_3D_tuple`, written in `block_to_ctile_map.hpp`, is essential for efficiently mapping a 1D block index to a 3D tuple representing the dimensions (M, N, K) of the problem space. This conversion plays a crucial role in parallel computing environments like CUDA, as it facilitates the mapping of computational tasks onto a 3D grid layout and optimally utilizes the Compute Units (CUs). By distributing the workload evenly across the CUs, the function enhances both the efficiency and performance of computational tasks on the hardware. Here's a brief on how the function works: 
 
 ```bash
+// This function maps a 1D block index to a 3D tuple representing dimensions (M, N, K) in a grid.
 __host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
-    const index_t& block_1d_id, const index_t& N, const index_t& k_batch) const
-{
-    // Calculate the number of blocks per N dimension
-    const auto Ndim = math::integer_divide_ceil(N, NPerBlock);
+      const index_t& block_1d_id,  // The 1D index of the block within the batch
+      const index_t& N,            // Total number of elements along the N dimension
+      const index_t& M,            // Total number of elements along the M dimension
+      const index_t& k_batch) const // Batch size along the K dimension
+  {
+      // Calculate the number of blocks along the N dimension using ceiling division
+      const auto Ndim = math::integer_divide_ceil(N, NPerBlock);
+      // Calculate the number of blocks along the M dimension using ceiling division
+      const auto Mdim = math::integer_divide_ceil(M, MPerBlock);
 
-    // Divide the 1D block index by the number of k_batch to find the overall batch position
-    const auto div_k_batch = block_1d_id / k_batch;
+      // Total number of blocks per batch is the product of blocks in N and M dimensions
+      const auto total_blocks_per_batch = Ndim * Mdim;
 
-    // Calculate the M index (Mid) by dividing the overall batch position by Ndim
-    // Calculate the N index (Nid) by taking the remainder of the division of the batch position by Ndim
-    // Calculate the K index (Kid) by taking the remainder of the 1D block index with k_batch
-    return make_tuple(div_k_batch / Ndim,
-                      div_k_batch % Ndim,
-                      block_1d_id % k_batch); // returns 3D tuple as (Mid,Nid,Kid)
-}
+      // Calculate the batch index (K dimension index) of the block
+      const index_t Kid = (block_1d_id / total_blocks_per_batch) % k_batch;
+      // Compute the number of remaining blocks after accounting for full batches
+      const index_t remaining_blocks = block_1d_id % total_blocks_per_batch; 
+      // Calculate the M dimension index using the number of remaining blocks divided by N dimension blocks
+      const index_t Mid = remaining_blocks / Ndim;
+      // Calculate the N dimension index as the remainder of blocks divided by N dimension
+      const index_t Nid = remaining_blocks % Ndim;
+
+      // Return the 3D tuple representing the block's position in the grid (Mid, Nid, Kid)
+      return make_tuple(Mid, Nid, Kid);
+  }
+
 ```
 ## 3. Block and Grid Configuration
 
