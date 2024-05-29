@@ -94,7 +94,7 @@ __device__ static void Run(const Argument& karg) {
 ## 2. Block to CTile Map Code Modification
 The function `convert_1D_block_idx_to_3D_tuple`, written in `block_to_ctile_map.hpp`, is essential for efficiently mapping a 1D block index to a 3D tuple representing the dimensions (M, N, K) of the problem space. This conversion plays a crucial role in parallel computing environments like CUDA, as it facilitates the mapping of computational tasks onto a 3D grid layout and optimally utilizes the Compute Units (CUs). By distributing the workload evenly across the CUs, the function enhances both the efficiency and performance of computational tasks on the hardware. Here's a brief on how the function works: 
 
-```bash
+```cpp
 // This function maps a 1D block index to a 3D tuple representing dimensions (M, N, K) in a grid.
 __host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
       const index_t& block_1d_id,  // The 1D index of the block within the batch
