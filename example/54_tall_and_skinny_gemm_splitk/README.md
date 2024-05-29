@@ -80,7 +80,7 @@ Perf: 0.0065438 ms, 0.0801198 TFlops, 10.0932 GB/s, deviceTsmmDl<64, 16, 128, 4,
 ## 1. 2D Array Handling in the Kernel
 Include the 2D array handling within the `Run` function of the device written in `gridwise_tall_and_skinny_gemm_splitk.hpp`, 
 and further explanation is provided in the report: 
-```bash
+```cpp
 __device__ static void Run(const Argument& karg) {
     // constexpr index_t shared_block_size =
     //     GridwiseTsmm::GetSharedMemoryNumberOfByte() / sizeof(FloatAB);
