@@ -7,6 +7,8 @@ trial = 15
 # inputfile = 'result_input.txt'
 # o = "-o"
 # outputfile = 'output4.csv'
+
+#adjust path according to location
 cmd =  './bin/example_gemm_xdl_streamk'
 
 verification = '1' # yes
