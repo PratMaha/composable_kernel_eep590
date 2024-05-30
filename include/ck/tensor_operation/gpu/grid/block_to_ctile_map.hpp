@@ -1309,21 +1309,35 @@ struct BlockToCTileMap_GemmStreamK
     {
         uint32_t iters_per_big_sk_block    = k_iters_per_big_block;
         uint32_t iters_per_little_sk_block = k_iters_per_big_block - 1;
+        // Calculate touched_tiles and block_idx contribution
+        uint32_t touched_tiles;
+        uint32_t block_idx_contribution;
         if(block_idx_ < sk_num_big_blocks)
         {
-            uint32_t touched_tiles    = k_iters_per_tile.div(block_idx_ * iters_per_big_sk_block +
-                                                          k_iters_per_tile.get() - 1);
-            uint32_t current_intersec = get_tile_intersections(touched_tiles, equiv_tiles_big);
-            return block_idx_ + current_intersec;
+            touched_tiles = k_iters_per_tile.div(block_idx_ * iters_per_big_sk_block +
+                                                k_iters_per_tile.get() - 1);
+            block_idx_contribution = block_idx_;
         }
         else
         {
             uint32_t block_idx_little_reverse = sk_num_blocks - block_idx_;
-            uint32_t touched_tiles            = k_iters_per_tile.div(
+            touched_tiles = k_iters_per_tile.div(
                 block_idx_little_reverse * iters_per_little_sk_block + k_iters_per_tile.get() - 1);
-            uint32_t current_intersec = get_tile_intersections(touched_tiles, equiv_tiles_little);
-            return get_total_acc_buffers() - (block_idx_little_reverse + current_intersec);
+            block_idx_contribution = get_total_acc_buffers() - block_idx_little_reverse;
         }
+
+        // Calculate current_intersec using touched_tiles
+        uint32_t current_intersec;
+        if(block_idx_ < sk_num_big_blocks)
+        {
+            current_intersec = get_tile_intersections(touched_tiles, equiv_tiles_big);
+        }
+        else
+        {
+            current_intersec = get_tile_intersections(touched_tiles, equiv_tiles_little);
+        }
+
+        return block_idx_contribution + current_intersec;
     }
 };
 
