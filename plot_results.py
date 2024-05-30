@@ -6,9 +6,10 @@ y_time = []
 x_tflops = []
 y_tflops = []
 
+#Set you trial number
 trial = 15
 
-# First plot k over time
+# First plot i over time
 with open(f"output_{trial}.txt") as file:
     for line in file:
         tokens = line.split()
