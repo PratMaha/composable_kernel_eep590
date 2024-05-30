@@ -159,10 +159,10 @@ struct DeviceGemmXdlStreamK : public DeviceGemmStreamK<ALayout,
             if constexpr(GridwiseGemm::Block2CTileMap::ReductionStrategy ==
                          StreamKReductionStrategy::Atomic)
             {
-                hipGetErrorString(hipMemsetAsync(karg.p_c_grid,
-                                                 0,
-                                                 karg.M * karg.N * sizeof(CDataType),
-                                                 stream_config.stream_id_));
+                // hipGetErrorString(hipMemsetAsync(karg.p_c_grid,
+                //                                 0,
+                //                                 karg.M * karg.N * sizeof(CDataType),
+                //                                 stream_config.stream_id_));
                 ave_time = launch_and_time_kernel(stream_config,
                                                   kernel,
                                                   grid_dims,
