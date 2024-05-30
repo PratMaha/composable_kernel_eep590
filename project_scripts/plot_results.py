@@ -9,6 +9,7 @@ y_tflops = []
 #Set you trial number
 trial = 15
 
+# Ensure to adjust the path to the output file
 # First plot i over time
 with open(f"output_{trial}.txt") as file:
     for line in file:
