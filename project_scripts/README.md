@@ -9,6 +9,17 @@ This project involves performance optimizations to the buffer management and bra
 ### Buffer Management
 In the file `device_gemm_xdl_streamk.hpp`, we have commented out the buffer management code. This buffer could potentially be removed entirely if it does not affect the accuracy of the computation.
 
+**Optimization**: Removing Asynchronous Memory Initialization
+To improve performance, we removed the initialization of asynchronous memory (hipMemsetAsync). This optimization aimed to reduce execution time by eliminating redundant memory initialization before kernel launch. We considered the following scenarios:
+
+**Kernel Initialization Overhead**: If the kernel initializes all elements of the memory buffer (karg.p_c_grid), additional asynchronous initialization is unnecessary and introduces overhead. Skipping it can improve performance.
+
+**Data Reuse or Overwrite**: If the memory buffer is completely overwritten by the kernel, initializing it to zero beforehand is redundant and can be omitted to speed up execution.
+
+**Limited Impact on Kernel Output**: If the initial content of karg.p_c_grid does not affect the final output, skipping initialization does not degrade results, enhancing performance by avoiding unnecessary operations.
+
+By considering these factors, we ensured the optimization did not compromise data integrity, leading to faster execution and better overall performance.
+
 ### Minimizing Branch Divergence
 We focused on reducing branch divergence in the `block_to_ctile_file`. The original code contained conditional branches based on the value of `blockidx`, which could introduce performance overhead due to branch prediction misses and potential pipeline stalls. We refactored the code to use arithmetic operations instead of conditional statements to minimize these issues.
 
