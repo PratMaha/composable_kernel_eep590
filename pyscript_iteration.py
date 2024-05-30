@@ -26,7 +26,7 @@ file = open(f"output_{trial}.txt", "w")
 # file2 = open(f"output2_{trial}.txt", "w")
 # file3 = open(f"output3_{trial}.txt", "w")
 
-for i in range(1,51):
+for i in range(1,11):
     print(f'running iteration: {i}')
     result = subprocess.run([
             # rocprof,
