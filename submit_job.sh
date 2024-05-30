@@ -8,7 +8,8 @@
 #SBATCH --partition=mi1004x
 # or use --partition=devel if required
 # Run your code. Example given below.
-# rocprof --hip-trace bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 120
+
+#rocprof --hip-trace bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 120
 #rocprof --hsa-trace bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 120
 #rocprof --sys-trace bin/example_gemm_xdl_streamk 1 2 1 3840 4096 4096 4096 4096 4096 120
 python /work1/sadasivan/student12/project/composable_kernel/pyscript_iteration.py
