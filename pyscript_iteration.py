@@ -24,8 +24,8 @@ file = open(f"output_{trial}.txt", "w")
 # file2 = open(f"output2_{trial}.txt", "w")
 # file3 = open(f"output3_{trial}.txt", "w")
 
-for k_batch in range(1,51):
-    print(f'running iteration: {k_batch}')
+for i in range(1,51):
+    print(f'running iteration: {i}')
     result = subprocess.run([
             # rocprof,
             # i,
@@ -61,7 +61,7 @@ for k_batch in range(1,51):
     tflops = float(perf_data[1].split(" ")[1])
     gbs = float(perf_data[2].split(" ")[1])
 
-    file.write(f'{k_batch} {ms} {tflops} {gbs}\n') 
+    file.write(f'{i} {ms} {tflops} {gbs}\n') 
 
     # perf_data2 = result.stdout.decode().split("\n")[39].split(",") # 24 no profile
     # print(perf_data2)
@@ -69,7 +69,7 @@ for k_batch in range(1,51):
     # nerror = int(perf_data2[1].split(":")[1])
     # perWrong = float(perf_data2[2].split("%")[0])
 
-    # file2.write(f'{k_batch} {maxerror} {nerror} {perWrong}\n') 
+    # file2.write(f'{i} {maxerror} {nerror} {perWrong}\n') 
 
 file.close()
 # file2.close()
