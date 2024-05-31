@@ -1016,7 +1016,8 @@ struct BlockToCTileMap_GemmStreamK
                                 uint32_t k,
                                 uint32_t num_cu,
                                 uint32_t occupancy,
-                                uint32_t sk_blocks = 0)
+                                uint32_t sk_blocks = 0,
+                                uint32_t max_tile_per_block = 2)
     {
         // total output tiles
         uint32_t num_tiles =
@@ -1025,7 +1026,7 @@ struct BlockToCTileMap_GemmStreamK
 
         uint32_t dp_tiles, dp_num_blocks, sk_total_iters;
         const uint32_t one_wave = num_cu * occupancy;
-
+        
         if((sk_blocks > one_wave) && (num_tiles > one_wave))
         {
             printf("WARNING: Do not tune above max possible occupancy for the kernel, "
@@ -1042,8 +1043,9 @@ struct BlockToCTileMap_GemmStreamK
             sk_num_blocks = sk_blocks;
 
         // default to regular DP GEMM if sk blocks == 0
-        if(sk_num_blocks == 0 || sk_num_blocks == 0xFFFFFFFF)
+        if(sk_num_blocks == 0 || sk_num_blocks == 0xFFFFFFFF || max_tile_per_block == 0)
         {
+            printf("Regular DP GEMM.\n");
             sk_num_blocks         = 0;
             dp_tiles              = num_tiles;
             sk_num_big_blocks     = 0;
@@ -1053,15 +1055,16 @@ struct BlockToCTileMap_GemmStreamK
             dp_start_block_idx = 0;
             sk_total_iters     = 0; // clear this tiles
         }
-        // 2-tile sk + DP GEMM
+        // sk + DP GEMM
         else
-        {
+        {   
+            printf("%u-tile sk + DP GEMM.\n", max_tile_per_block);
             // grid size
             uint32_t grid_size = sk_num_blocks;
             // check if there's enough work for DP+ stream-k
             bool bigEnough = num_tiles > grid_size;
-            // max of 2 sk tiles per block
-            uint32_t sk_tiles = bigEnough ? grid_size + num_tiles % grid_size : num_tiles;
+            // max num of sk tiles per block
+            uint32_t sk_tiles = bigEnough ? (max_tile_per_block - 1) * grid_size + num_tiles % grid_size : num_tiles;
             // remaining tiles are DP tiles
             dp_tiles = bigEnough ? (num_tiles - sk_tiles) : 0;
 
