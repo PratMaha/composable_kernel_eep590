@@ -1,0 +1,1 @@
+/var/spool/slurmd/job45676/slurm_script: line 13: omniperf: command not found

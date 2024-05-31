@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/CMakeFiles/gtest-populate"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/CMakeFiles/gtest-populate.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/CMakeFiles/gtest-populate-complete.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-build.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-configure.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-download.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-install.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-mkdir.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-patch.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-test.rule"
+		},
+		{
+			"file" : "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/build/_deps/gtest-subbuild/gtest-populate-prefix/src/gtest-populate-stamp/gtest-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"gtest-populate"
+		],
+		"name" : "gtest-populate"
+	}
+}

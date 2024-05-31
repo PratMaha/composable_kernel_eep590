@@ -1,0 +1,37 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_bf16_bf16_mk_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_bf16_bf16_mk_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_bf16_bf16_mk_nk_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_bf16_bf16_mk_nk_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_i8_bf16_mk_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_i8_bf16_mk_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_i8_bf16_mk_nk_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_bf16_i8_bf16_mk_nk_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_f16_f16_f16_mk_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_multiple_d_splitk_xdl_two_stage_f16_f16_f16_mk_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_km_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_km_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_km_nk_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_km_nk_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_mk_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_mk_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_mk_nk_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_f16_f16_f16_mk_nk_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_kn_mn_irregular_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_kn_mn_irregular_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_nk_mn_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_nk_mn_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_nk_mn_irregular_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f16_f16_mk_nk_mn_irregular_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f8_f16_mk_kn_mn_irregular_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f16_f8_f16_mk_kn_mn_irregular_instance.cpp.o.d"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f8_f16_f16_mk_kn_mn_irregular_instance.cpp.o"
+  "CMakeFiles/device_grouped_gemm_instance.dir/device_grouped_gemm_xdl_splitk_f8_f16_f16_mk_kn_mn_irregular_instance.cpp.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/device_grouped_gemm_instance.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

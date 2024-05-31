@@ -1,0 +1,23 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_bias_perchannel_quantization_int8_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_bias_perchannel_quantization_int8_instance.cpp.o.d"
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_bias_perlayer_quantization_int8_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_bias_perlayer_quantization_int8_instance.cpp.o.d"
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_perchannel_quantization_int8_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_perchannel_quantization_int8_instance.cpp.o.d"
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_perlayer_quantization_int8_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/conv2d_fwd/device_conv2d_xdl_perlayer_quantization_int8_instance.cpp.o.d"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_km_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_km_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_km_nk_mn_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_km_nk_mn_instance.cpp.o.d"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_mk_kn_mn_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_mk_kn_mn_instance.cpp.o.d"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_mk_nk_mn_instance.cpp.o"
+  "CMakeFiles/device_quantization_instance.dir/gemm/device_gemm_quantization_xdl_c_shuffle_i8_i8_i8_mk_nk_mn_instance.cpp.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/device_quantization_instance.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

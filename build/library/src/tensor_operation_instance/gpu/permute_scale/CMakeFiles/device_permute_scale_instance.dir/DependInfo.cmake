@@ -1,0 +1,30 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_1d_fp16_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_1d_fp16_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_1d_fp16_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_1d_fp32_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_1d_fp32_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_1d_fp32_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_2d_fp16_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_2d_fp16_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_2d_fp16_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_2d_fp32_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_2d_fp32_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_2d_fp32_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_3d_fp16_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_3d_fp16_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_3d_fp16_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_3d_fp32_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_3d_fp32_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_3d_fp32_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_4d_fp16_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_4d_fp16_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_4d_fp16_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_4d_fp32_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_4d_fp32_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_4d_fp32_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_5d_fp16_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_5d_fp16_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_5d_fp16_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_5d_fp32_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_5d_fp32_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_5d_fp32_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_6d_fp16_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_6d_fp16_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_6d_fp16_instances.cpp.o.d"
+  "/work1/sadasivan/student51/assignments/finalProject/composable_kernel/library/src/tensor_operation_instance/gpu/permute_scale/device_permute_scale_6d_fp32_instances.cpp" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_6d_fp32_instances.cpp.o" "gcc" "library/src/tensor_operation_instance/gpu/permute_scale/CMakeFiles/device_permute_scale_instance.dir/device_permute_scale_6d_fp32_instances.cpp.o.d"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
