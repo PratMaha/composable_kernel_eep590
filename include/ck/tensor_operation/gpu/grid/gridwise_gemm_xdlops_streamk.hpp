@@ -15,6 +15,10 @@
 #include "ck/tensor_operation/gpu/thread/threadwise_tensor_slice_transfer.hpp"
 #include "ck/tensor_operation/gpu/element/element_wise_operation.hpp"
 #include "ck/tensor_operation/gpu/grid/gridwise_gemm_pipeline_v3.hpp"
+#include "ck/tensor_operation/gpu/grid/gridwise_gemm_pipeline_v31.hpp"
+#include "ck/tensor_operation/gpu/grid/gridwise_gemm_pipeline_v32.hpp"
+#include "ck/tensor_operation/gpu/grid/gridwise_gemm_pipeline_v33.hpp"
+#include "ck/tensor_operation/gpu/grid/gridwise_gemm_pipeline_v34.hpp"
 #include "ck/utility/workgroup_barrier.hpp"
 #include "ck/utility/reduction_functions_accumulate.hpp"
 
@@ -523,6 +527,12 @@ struct GridwiseGemm_bk0mk1_bk0nk1_mn_xdlops_streamk
 
         // gridwise GEMM pipeline
         const auto gridwise_gemm_pipeline = GridwiseGemmPipeline_v3();
+        //alternatives:
+        // const auto gridwise_gemm_pipeline = GridwiseGemmPipeline_v31();
+        // const auto gridwise_gemm_pipeline = GridwiseGemmPipeline_v32();
+        // const auto gridwise_gemm_pipeline = GridwiseGemmPipeline_v33();
+        // const auto gridwise_gemm_pipeline = GridwiseGemmPipeline_v34();
+
         uint32_t* p_semaphore =
             reinterpret_cast<uint32_t*>(reinterpret_cast<char*>(p_workspace) +
                                         block_mapping.get_workspace_size_for_acc(sizeof(FloatAcc)));
