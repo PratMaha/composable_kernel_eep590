@@ -1060,8 +1060,20 @@ struct BlockToCTileMap_GemmStreamK
             uint32_t grid_size = sk_num_blocks;
             // check if there's enough work for DP+ stream-k
             bool bigEnough = num_tiles > grid_size;
+
+            // START CODE CHANGE
+
+            // Try max of 1 sk tile per block
+            // uint32_t sk_tiles = bigEnough ? num_tiles % grid_size : num_tiles;
+
             // max of 2 sk tiles per block
-            uint32_t sk_tiles = bigEnough ? grid_size + num_tiles % grid_size : num_tiles;
+            // uint32_t sk_tiles = bigEnough ? grid_size + num_tiles % grid_size : num_tiles;
+
+            // Try max of 3 sk tile per block
+            uint32_t sk_tiles = bigEnough ? (2*grid_size) + num_tiles % grid_size : num_tiles;
+
+            // END CODE CHANGE
+
             // remaining tiles are DP tiles
             dp_tiles = bigEnough ? (num_tiles - sk_tiles) : 0;
 
