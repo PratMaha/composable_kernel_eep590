@@ -1,4 +1,4 @@
-## This is teh official readme for AMD's Composable Kernel Library. For the detailed readme for the performed experiments, navigate to `/experiments/Readme.md`
+## This is the official readme for AMD's Composable Kernel Library. For the detailed readme for the performed experiments, navigate to `/experiments/Readme.md`
 
 # Composable Kernel
 
