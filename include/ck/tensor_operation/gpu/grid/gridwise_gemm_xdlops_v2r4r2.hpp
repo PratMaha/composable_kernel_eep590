@@ -655,7 +655,7 @@ struct GridwiseGemm_bk0mk1_bk0nk1_mn_xdlops_v2r4r2
     // return block_id to C matrix tile idx (m0, n0, k_split) mapping
     __host__ __device__ static constexpr auto MakeDefaultBlock2CTileMap()
     {
-        return BlockToCTileMap_3DGrid_KSplit<MPerBlock, NPerBlock>();
+        return BlockToCTileMap_3DGrid_KSplit1<MPerBlock, NPerBlock>();
     }
 
     using CGridDesc_M_N         = remove_cvref_t<decltype(MakeCGridDescriptor_M_N(1, 1, 1))>;
