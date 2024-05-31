@@ -1231,7 +1231,11 @@ struct BlockToCTileMap_GemmStreamK
 
     __host__ __device__ uint32_t get_workspace_size_for_acc(uint32_t acc_element_bytes) const
     {
+        //original config
         static constexpr uint32_t alignment = 128;
+        //Other alternatives
+        // static constexpr uint32_t alignment = 64;
+        // static constexpr uint32_t alignment = 256;
         uint32_t acc_buffer_bytes =
             MPerBlock * NPerBlock * get_total_acc_buffers() * acc_element_bytes;
         return (acc_buffer_bytes + alignment - 1) / alignment * alignment;
