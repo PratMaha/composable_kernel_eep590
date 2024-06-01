@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 struct ProblemSize final
 {
     ck::index_t M = 3840;
@@ -21,28 +19,11 @@ struct ExecutionConfig final
     int init_method      = 1;
     bool time_kernel     = false;
 };
-int getNumberOfGPUs()
-{
-    int device_count = 0;
-    hipError_t err = hipGetDeviceCount(&device_count);
-    if (err != hipSuccess)
-    {
-        std::cerr << "Error getting device count: " << hipGetErrorString(err) << std::endl;
-        return -1; // Return an error code or handle it appropriately
-    }
-    return device_count;
-}
-
 
 bool run_splitK_gemm(const ProblemSize& problem_size, const ExecutionConfig& config)
 {
     using namespace ck::literals;
-    /*
-    using namespace std;
 
-    int num_gpus = getNumberOfGPUs();
-    std::cout << "Number of GPUs available " << num_gpus << std::endl;
-*/
 #if defined(BUILD_INT4_EXAMPLE) && defined(CK_EXPERIMENTAL_BIT_INT_EXTENSION_INT4)
     static_assert(sizeof(ck::int4_t) == sizeof(int8_t));
     static_assert(sizeof(ADataType) == sizeof(KernelADataType));
@@ -173,17 +154,17 @@ bool run_splitK_gemm(const ProblemSize& problem_size, const ExecutionConfig& con
             pass &= ck::utils::check_err(c_m_n_device_result, c_m_n_host_result);
         }
     }
-    float ave_time = 0.0f, tflops = 0.0f, gb_per_sec = 0.0f;
+
     if(config.time_kernel)
     {
-        ave_time = invoker.Run(argument, StreamConfig{nullptr, config.time_kernel, 1});
+        float ave_time = invoker.Run(argument, StreamConfig{nullptr, config.time_kernel, 1});
 
         std::size_t flop = std::size_t(2) * M * N * K;
         std::size_t num_btype =
             sizeof(ADataType) * M * K + sizeof(BDataType) * K * N + sizeof(CDataType) * M * N;
 
-        tflops     = static_cast<float>(flop) / 1.E9 / ave_time;
-        gb_per_sec = num_btype / 1.E6 / ave_time;
+        float tflops     = static_cast<float>(flop) / 1.E9 / ave_time;
+        float gb_per_sec = num_btype / 1.E6 / ave_time;
         std::cout << "Perf: " << ave_time << " ms, " << tflops << " TFlops, " << gb_per_sec
                   << " GB/s, " << gemm.GetTypeString() << std::endl;
     }
