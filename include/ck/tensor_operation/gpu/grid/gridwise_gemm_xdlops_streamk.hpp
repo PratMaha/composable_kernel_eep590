@@ -561,7 +561,7 @@ struct GridwiseGemm_bk0mk1_bk0nk1_mn_xdlops_streamk
                                                                                 // descriptor
 
         // stream-k: for new work for all the persistent blocks.
-        for(; block_idx < block_mapping.total_blocks_allocated(); block_idx += gridDim.x)
+        for(; block_idx < block_mapping.total_blocks_allocated(); block_idx += gridDim.x * 2)
         {
 
             // offset for last acc buffer of this block
@@ -770,10 +770,10 @@ struct GridwiseGemm_bk0mk1_bk0nk1_mn_xdlops_streamk
                 auto spatial_idx = block_mapping.tile_to_spatial(tile_idx, m, n);
 
                 const index_t m_block_data_idx_on_grid =
-                    __builtin_amdgcn_readfirstlane(spatial_idx[I0] * MPerBlock);
+                    __builtin_amdgcn_readfirstlane((spatial_idx[I0] + threadIdx.x) * MPerBlock);
 
                 const index_t n_block_data_idx_on_grid =
-                    __builtin_amdgcn_readfirstlane(spatial_idx[I1] * NPerBlock);
+                    __builtin_amdgcn_readfirstlane((spatial_idx[I0] + threadIdx.y) * NPerBlock);
 
                 const index_t k0_block_data_idx_on_grid =
                     __builtin_amdgcn_readfirstlane(iter_offset * K0PerBlock);
