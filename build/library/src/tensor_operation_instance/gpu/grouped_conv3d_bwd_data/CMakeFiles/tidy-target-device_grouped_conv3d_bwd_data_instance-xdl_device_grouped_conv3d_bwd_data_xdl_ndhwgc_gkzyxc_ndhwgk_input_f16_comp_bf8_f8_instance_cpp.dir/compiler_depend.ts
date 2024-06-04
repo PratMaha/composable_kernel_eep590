@@ -1,2 +1,0 @@
-# CMAKE generated file: DO NOT EDIT!
-# Timestamp file for custom commands dependencies management for tidy-target-device_grouped_conv3d_bwd_data_instance-xdl_device_grouped_conv3d_bwd_data_xdl_ndhwgc_gkzyxc_ndhwgk_input_f16_comp_bf8_f8_instance_cpp.
