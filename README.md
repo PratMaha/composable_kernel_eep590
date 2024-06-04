@@ -191,4 +191,49 @@ script/uninstall_precommit.sh
 ```
 
 If you need to temporarily disable pre-commit hooks, you can add the `--no-verify` option to the
-`git commit` command.
+git commit` command.
+
+## Modification of this fork
+
+This fork introduces an implementation to improve the performnace on mi100 using some technique adapted on the mi300, especially on vector L1 cache hit rate. During the development, we also explore some parameters combination to improve the overall performance without the code modification.
+
+### How to build 
+
+```bash
+mkdir build
+cd build
+make example_splitK_gemm_xdl_fp16
+```
+
+### Baseline
+
+```bash
+bin/example_splitK_gemm_xdl_fp16 1 2 1 <splitk_factor.> 3840 4096 4096 4096 4096 4096
+```
+
+You can experiment the splitK algorithm with different kbatch value. For example, splitk_factor = 1 means the splitK algorithm runs with kbatch = 1.  
+
+### Profile
+
+1. Execution metrics tracking via omniperf
+Use the following cmd to load the omniperf first.
+
+```bash
+module load omniperf
+module load rocm/5.7.1
+```
+
+Then we would try to add the following cmd to the script file called submit_jobs.sh and execute them one by one.
+
+```bash
+omniperf profile -n bin -- ./example_splitK_gemm_xdl_fp16 1 2 1 8 3840 4096 4096 4096 4096 4096
+omniperf analyze -p workloads/bin/mi100/ &> analyze.txt
+```
+
+2. Hardware metrics tracking via rocprof input file
+
+View the result from profiling using the following cmd.
+
+```bash
+vim analyze.txt
+```
