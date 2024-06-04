@@ -4,11 +4,6 @@ NOTE: A lot of the scripts in this file were made / used with specific paths on 
 these scripts to be more robust, but we ran out of time towards the end of the project and had to focus on higher priority tasks.
 
 data/ 
-    cache_analysis/ [contains the supporting / intermediate data files used to generate the L1 Cache Hit Rate plots]
-        omniperf_analysis_out/
-            omniperf[0-50].txt [omniperf analysis files for runs with varying k-batch values]
-        cache_analysis.txt [summary of omniperf analysis files formatted for plotting]
-
     perf_analysis/
         untuned_perf_analysis.txt [k-batch, perf, tflops, bandwidth data formatted for plotting for the unchanged kernel]
         b64_perf_output.txt [few k-batch values and perf for optimized block size 64 kernel]
