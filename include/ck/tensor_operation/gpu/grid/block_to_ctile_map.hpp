@@ -659,12 +659,19 @@ struct BlockToCTileMap_3DGrid_KSplit
     }
 
     __host__ __device__ inline constexpr auto convert_1D_block_idx_to_3D_tuple(
-        const index_t& block_1d_id, const index_t& N, const index_t& k_batch) const
+        const index_t& block_1d_id, const index_t& N, const index_t& M, const index_t& k_batch) const
     {
         const auto Ndim = math::integer_divide_ceil(N, NPerBlock);
-        return make_tuple(((block_1d_id) / (k_batch * Ndim)),
-                          (((block_1d_id) / k_batch) % Ndim),
-                          (block_1d_id) % k_batch); // returns 3D tuple as (Mid,Nid,Kid)
+        const auto Mdim = math::integer_divide_ceil(M, MPerBlock);
+
+        const auto total_blocks_per_batch = Ndim * Mdim;
+
+        const index_t Kid = (block_1d_id / total_blocks_per_batch) % k_batch;
+        const index_t remaining_blocks = block_1d_id % total_blocks_per_batch; //using the remaining blocks to even the utilization of CUs
+        const index_t Mid = remaining_blocks / Ndim;
+        const index_t Nid = remaining_blocks % Ndim;
+
+        return make_tuple(Mid, Nid, Kid); // returns 3D tuple as (Mid,Nid,Kid)
     }
     template <typename CTileIdx, typename CTileDim>
     __host__ __device__ bool ValidCTileIndex(const CTileIdx& /* c_tile_idx */,
